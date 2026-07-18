@@ -26,7 +26,26 @@ To get the best performance out of this worker, it is recommended to use cached 
 The worker can be configured via environment variables set in the RunPod hub configuration:
 
 - `LLAMA_SERVER_CMD_ARGS`: Command line arguments (argv) for the `llama-server` binary. Example: `-hf /path/to/model.gguf:Q4_K_M --ctx-size 4096`. **IMPORTANT**: Please do not define the port argument here, as the worker will always use port `3098` automatically.
+- `LLAMA_CACHED_MODEL`: Hugging Face repository ID for a model attached through RunPod model caching.
+- `LLAMA_CACHED_GGUF_PATH`: Main GGUF path inside the cached Hugging Face repository.
+- `LLAMA_CACHED_MMPROJ_PATH`: Optional multimodal projector path inside the same cached repository. When set, the worker resolves it and starts llama.cpp with `--mmproj` automatically.
+- `LLAMA_SERVER_START_TIMEOUT_SECONDS`: Maximum time to wait for llama.cpp initialization. Default is `600` seconds.
 - `MAX_CONCURRENCY`: Maximum number of concurrent requests the worker can handle. Default is `8`.
+
+### Cached multimodal example
+
+Attach the Hugging Face repository to the endpoint as a cached model, then set:
+
+```text
+LLAMA_CACHED_MODEL=owner/model-GGUF
+LLAMA_CACHED_GGUF_PATH=model-Q4_K_M.gguf
+LLAMA_CACHED_MMPROJ_PATH=mmproj-model-f16.gguf
+LLAMA_SERVER_CMD_ARGS=--ctx-size 32768 --jinja -ngl 999
+```
+
+Do not also put `--mmproj` in `LLAMA_SERVER_CMD_ARGS`; the worker rejects
+duplicate projector configuration. Leave `LLAMA_CACHED_MMPROJ_PATH` unset for
+normal text-only models.
 
 ## License
 

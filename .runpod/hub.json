@@ -42,6 +42,26 @@
                 }
             },
             {
+                "key": "LLAMA_CACHED_MMPROJ_PATH",
+                "input": {
+                    "name": "Optional multimodal projector path",
+                    "type": "string",
+                    "description": "Path to an mmproj GGUF in the same cached Hugging Face repository. Leave empty for text-only inference.",
+                    "default": "",
+                    "advanced": true
+                }
+            },
+            {
+                "key": "LLAMA_SERVER_START_TIMEOUT_SECONDS",
+                "input": {
+                    "name": "llama-server startup timeout",
+                    "type": "number",
+                    "description": "Maximum seconds to wait for llama-server initialization.",
+                    "default": 600,
+                    "advanced": true
+                }
+            },
+            {
                 "key": "MAX_CONCURRENCY",
                 "input": {
                     "name": "Maximum Concurrency",

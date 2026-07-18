@@ -1,5 +1,5 @@
-# Use an official ggml-org/llama.cpp image as the base image
-FROM ghcr.io/ggml-org/llama.cpp:server-cuda
+# Pin the official llama.cpp CUDA image for reproducible worker builds.
+FROM ghcr.io/ggml-org/llama.cpp:server-cuda@sha256:1b3d1458ccda7287feab41b8001311acc03e24cde99ec0a2908fe83830562f38
 
 ENV PYTHONUNBUFFERED=1
 
