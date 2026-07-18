@@ -37,7 +37,7 @@ run_worker() {
         LLAMA_CACHED_MMPROJ_PATH="${1:-}" \
         LLAMA_SERVER_CMD_ARGS="${2:---ctx-size 4096 --jinja -ngl 999}" \
         LLAMA_SERVER_START_TIMEOUT_SECONDS=10 \
-        ./start.sh
+        bash ./start.sh
     )
 }
 
